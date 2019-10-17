@@ -4,17 +4,17 @@ ELASTICSEARCH SETUP
 
 STEP 1: Update system
 
- 
+
 
 Run the following commands in sequence
 
- 
+
 
 sudo apt-get update
 
 sudo apt-get install default-jre
 
- 
+
 
 Checking the java version should return the following output or similar
 
@@ -22,7 +22,7 @@ openjdk version "1.8.0_151"
 OpenJDK Runtime Environment (build 1.8.0_151-8u151-b12-0ubuntu0.16.04.2-b12)
 OpenJDK 64-Bit Server VM (build 25.151-b12, mixed mode)
 
- 
+
 
 STEP 2: Installing elasticsearch nodes
 
@@ -32,7 +32,7 @@ First, get ElasticSearch's signing key
 
 wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
 
- 
+
 
 Then, install the necessary packages and add repo definition to system
 
@@ -40,26 +40,26 @@ sudo apt-get install apt-transport-https
 
 echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-6.x.list
 
- 
+
 
 Lastly, install Elastic Search
 
-sudo apt-get update
+sudo apt-get update 
 sudo apt-get install elasticsearch
 
- 
+
 
 STEP 3: Edit config
 
- 
+
 
 By default, your instance of ElasticSearch only runs locally, and is not published. This means that you cannot access it using postman and what not for easier testing purposes. Thus, you need to edit some of the configurations. 
 
- 
+
 
 So run the command, vim config/elasticsearch.yml, and edit the files as follow
 
- 
+
 
 #give your cluster a name.
 cluster.name: cloud-console
@@ -78,19 +78,19 @@ discovery.zen.ping.unicast.hosts: [" [Your VM IP HERE]"]
 
 STEP 4: Test that your server is live
 
- 
+
 
 To start ElasticSeach: run 
 
 sudo service elasticsearch start
 
- 
+
 
 Then to test that the server is running, 
 
 Run: curl https://[your_ip]:9200
 
- 
+
 
 You should receive something along the lines of:
 
@@ -113,13 +113,13 @@ You should receive something along the lines of:
 "tagline" : "You Know, for Search"
 }
 
- 
 
- 
+
+
 
 LOGSTASH SETUP:
 
- 
+
 
 Step 1: Checking Pre-req
 
@@ -127,11 +127,11 @@ Run: java-version.
 
 Ensure that you have java installed, if not, install java.
 
- 
+
 
 Step 2: Install LogStash
 
- 
+
 
 Download and install the Public Signing Key:
 wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
@@ -166,11 +166,11 @@ A Typical logstash structure is like this
 - apache.conf
 - haproxy.conf
 - syslog.conf
- 
+
 
 in these conf files, you put the logstash configurations, such as 
 
- 
+
 
 input {
         file {
@@ -218,11 +218,11 @@ cd /usr/share/logstash
 
 sudo systemctl start logstash
 
- 
+
 
 This should automatically run all the conf files stored in conf.d
 
- 
+
 
 If you want to monitor the logstash service, run:
 
@@ -256,3 +256,18 @@ sudo update-alternatives --config java
 Other Notes:
 
 Some times when you want to explicitly run either logstash or elasticsearch, you should go to its respective folder located in /usr/share, and run it as ./bin/logstash or ./bin/elasticsearch
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
